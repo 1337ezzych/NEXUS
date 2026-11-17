@@ -1,0 +1,24 @@
+name: iOS CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Sources/**'
+      - '.github/workflows/**'
+
+jobs:
+  source-check:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Swift source files exist
+        run: |
+          test -f Sources/NEXUS/NEXUSApp.swift
+          test -f Sources/NEXUS/ContentView.swift
+          find Sources/NEXUS -name '*.swift' -print
+      - name: Show Xcode version
+        run: xcodebuild -version
+      - name: Note
+        run: echo "Add an Xcode project and TDLib framework before enabling xcodebuild archive."
