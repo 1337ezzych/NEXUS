@@ -24,4 +24,4 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: NEXUS
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
-        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGNING_ALLOWED: YES
