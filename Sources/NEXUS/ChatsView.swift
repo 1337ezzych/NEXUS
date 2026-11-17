@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ChatsView: View {
     @EnvironmentObject private var appState: AppState
-    @State private var selectedChat: Chat?
 
     var body: some View {
         NavigationStack {
@@ -17,7 +16,7 @@ struct ChatsView: View {
                 ScrollView {
                     LazyVStack(spacing: 10) {
                         ForEach(appState.filteredChats) { chat in
-                            Button { selectedChat = chat } label: {
+                            NavigationLink(value: chat) {
                                 ChatRow(chat: chat, theme: appState.selectedTheme)
                             }.buttonStyle(.plain)
                         }
@@ -26,7 +25,7 @@ struct ChatsView: View {
             }
             .padding(.horizontal, 20).padding(.top, 14)
             .background(Color(hex: 0x090B13))
-            .navigationDestination(item: $selectedChat) { chat in
+            .navigationDestination(for: Chat.self) { chat in
                 ChatDetailView(chat: chat)
             }
         }
